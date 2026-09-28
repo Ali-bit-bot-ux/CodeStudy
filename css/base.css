@@ -1,0 +1,111 @@
+/* ==========================================================================
+   CodeStudy. — Base & Reset
+   ========================================================================== */
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg);
+}
+
+html, body { min-height: 100%; }
+
+body {
+  font-family: var(--font);
+  background: transparent;
+  color: var(--text-light);
+  overflow-x: hidden;
+  position: relative;
+}
+
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; background: none; border: none; font: inherit; }
+img, video { max-width: 100%; display: block; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(37,99,235,0.4); }
+
+/* Scroll progress bar (Stepplify-style, top of page) */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; width: 100%; height: 3px;
+  z-index: 500; pointer-events: none;
+  background: rgba(255,255,255,0.06);
+}
+.scroll-progress-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--blue), #60A5FA);
+  transition: width 0.1s linear;
+}
+
+/* Reveal animation (Stepplify-style) */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.reveal-up.is-revealed { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-up { opacity: 1; transform: none; transition: none; }
+}
+
+/* Container */
+.container {
+  width: 100%; max-width: var(--max-w);
+  margin: 0 auto; padding: 0 28px;
+}
+
+/* Section common */
+.section {
+  position: relative;
+  z-index: 10;
+  padding: 96px 0;
+}
+
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  display: block;
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-size: clamp(1.9rem, 3.8vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.section-sub {
+  font-size: 1.05rem;
+  color: var(--text-mid);
+  line-height: 1.65;
+  max-width: 620px;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 60px;
+}
+
+.section-header .section-sub { margin: 0 auto; }
+
+/* Utility */
+.gradient-text {
+  background: linear-gradient(90deg, #60A5FA, #38BDF8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

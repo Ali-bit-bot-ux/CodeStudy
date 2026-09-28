@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeStudy. — Обучение программированию и разработке игр для детей 7–13 лет</title>
+  <meta name="description" content="Онлайн-школа программирования для детей 7–13 лет. HTML/CSS, Python и Roblox GameDev, C++ алгоритмы. 80% практики, Google Meet, видеоотчёты родителям после каждого занятия.">
+  <meta property="og:title" content="CodeStudy. — Онлайн-школа программирования для детей">
+  <meta property="og:description" content="Практические курсы: HTML/CSS, Python & Roblox, C++ алгоритмы. Дети 7–13 лет. Бесплатный пробный урок в Google Meet.">
+
+  <!-- Prevent FOUC on language switch -->
+  <script>
+    if (localStorage.getItem('cs_lang') && localStorage.getItem('cs_lang') !== 'ru') {
+      document.documentElement.style.opacity = '0';
+      document.documentElement.style.transition = 'opacity 0.2s ease';
+    }
+  </script>
+
+  <!-- Stylesheets (no framework, pure CSS) -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+
+<!-- Fixed global background video (Stepplify style: continuously visible across the entire website) -->
+<div class="site-bg-scene" aria-hidden="true">
+  <video class="site-bg-video" id="heroVideo" autoplay muted loop playsinline preload="auto">
+    <source src="assets/bg-video.mp4" type="video/mp4">
+    <source src="assets/сайты.mp4" type="video/mp4">
+    <source src="assets/сайт.mp4" type="video/mp4">
+    <source src="assets/%D1%81%D0%B0%D0%B9%D1%82%D1%8B.mp4" type="video/mp4">
+    <source src="assets/%D1%81%D0%B0%D0%B9%D1%82.mp4" type="video/mp4">
+    <source src="bg-video.mp4" type="video/mp4">
+  </video>
+  <div class="site-bg-veil"></div>
+</div>
+
+<!-- ═══ Scroll progress bar ═══ -->
+<div class="scroll-progress" aria-hidden="true">
+  <div class="scroll-progress-fill" id="scrollFill"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     HERO — pill-nav + centered text + 2 CTAs   (Stepplify exact)
+     ══════════════════════════════════════════════════════════════════════ -->
+<div class="hero">
+
+  <!-- ── TOP NAR (Stepplify pill) ── -->
+  <header class="topbar" id="topbar">
+    <!-- Brand -->
+    <a href="#" class="brand">
+      <div class="brand-mark">
+        <img src="logo/logo.gif" alt="CodeStudy." class="brand-avatar">
+      </div>
+      <span class="brand-name">CodeStudy.</span>
+    </a>
+
+    <!-- Nav center -->
+    <nav class="nav-center" id="navCenter">
+      <a href="#courses" data-i18n="nav_courses">Курсы</a>
+      <a href="#pricing" data-i18n="nav_pricing">Цены</a>
+      <a href="#transparency" data-i18n="nav_about">О нас</a>
+      <a href="#faq" data-i18n="nav_faq">FAQ</a>
+    </nav>
+
+    <!-- Nav right -->
+    <div class="nav-right">
+      <!-- Lang -->
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="ru">RU</button>
+        <button class="lang-btn" data-lang="kz">KZ</button>
+      </div>
+
+      <!-- CTA -->
+      <button class="btn-glass-sm open-modal-btn" data-i18n="btn_header_cta">
+        Пробный урок
+      </button>
+
+      <!-- Hamburger -->
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Меню" aria-expanded="false" aria-controls="navCenter">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ── HERO CONTENT ── -->
+  <main class="hero-main">
+    <div class="hero-content">
+
+      <!-- Status badge -->
+      <div class="hero-status">
+        <img src="logo/logo.gif" alt="" class="status-avatar">
+        <span class="pulse-dot"></span>
+        <span data-i18n="hero_cat">ПРОГРАММИРОВАНИЕ / ROBLOX / АЛГОРИТМЫ — 7–13 ЛЕТ</span>
+      </div>
+
+      <!-- Big headline -->
+      <h1 class="hero-title">
+        <span data-i18n="hero_title_1">Обучение программированию</span><br>
+        <span class="accent" data-i18n="hero_title_2">с нуля для детей 7–13 лет</span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="hero-sub" data-i18n="hero_desc">
+        Практические курсы: HTML/CSS, Python &amp; Roblox GameDev, C++ алгоритмы.<br>
+        80% времени — реальный код. Отчёты родителям после каждого урока.
+      </p>
+
+      <!-- Trust chips -->
+      <div class="hero-trust">
+        <span class="trust-chip">📹 Google Meet</span>
+        <span class="trust-chip">👤 До 4 учеников</span>
+        <span class="trust-chip">💬 Поддержка 24/7</span>
+        <span class="trust-chip">📊 Отчёты родителям</span>
+      </div>
+
+      <!-- CTA row -->
+      <div class="cta-row">
+        <button class="btn btn-primary open-modal-btn">
+          <span data-i18n="btn_trial">Записаться на бесплатный пробный урок</span>
+          <span class="arrow">→</span>
+        </button>
+        <button class="btn btn-secondary direct-wa-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 1.95.813 3.097.813h.001c3.18 0 5.767-2.586 5.768-5.766 0-3.18-2.588-5.766-5.77-5.766zm9.969 5.766c0 5.518-4.482 10-10 10-1.749 0-3.385-.45-4.819-1.238l-5.181 1.36 1.385-5.061c-.886-1.493-1.385-3.236-1.385-5.061 0-5.518 4.482-10 10-10s10 4.482 10 10z"/></svg>
+          <span data-i18n="btn_whatsapp">Консультация в WhatsApp</span>
+        </button>
+        <button class="btn btn-quiz-hero" id="heroQuizBtn">
+          <span class="quiz-hero-sparkle">✨</span>
+          <span>Подобрать курс за 1 минуту</span>
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+</div><!-- /hero -->
+
+
+<!-- ═══ Stats bar ═══ -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-number">7–16</div>
+        <div class="stat-label">Возраст учеников</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">до 4</div>
+        <div class="stat-label">Учеников в группе</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">80%</div>
+        <div class="stat-label">Практики на уроке</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">3</div>
+        <div class="stat-label">Направления курсов</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ Interactive Quiz Section ═══ -->
+<section class="quiz-section" id="quiz">
+  <div class="container">
+    <div class="quiz-section-inner reveal-up">
+      <div class="quiz-section-badge">🎯 БЕСПЛАТНЫЙ ПОДБОР КУРСА</div>
+      <h2 class="quiz-section-title">Какое направление подойдёт <span class="accent">вашему ребёнку?</span></h2>
+      <p class="quiz-section-sub">Ответьте на 3 вопроса — получите персональный результат и запись на бесплатный урок</p>
+      <div class="quiz-section-cards">
+        <div class="quiz-teaser-card">
+          <div class="quiz-teaser-icon">🎮</div>
+          <div class="quiz-teaser-label">Создание игр</div>
+        </div>
+        <div class="quiz-teaser-card">
+          <div class="quiz-teaser-icon">🌐</div>
+          <div class="quiz-teaser-label">Сайты и дизайн</div>
+        </div>
+        <div class="quiz-teaser-card">
+          <div class="quiz-teaser-icon">🧠</div>
+          <div class="quiz-teaser-label">Логика и олимпиады</div>
+        </div>
+      </div>
+      <button class="btn btn-quiz-start" id="quizStartBtn">
+        <span>Пройти мини-квиз и узнать свой курс</span>
+        <span class="arrow">→</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 4 Feature cards ═══ -->
+<section class="features-section">
+  <div class="container">
+
+    <!-- Search bar above cards -->
+    <div class="search-wrap" style="margin-bottom: 44px;">
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="courseSearch" class="search-input"
+          placeholder="Какой курс вас интересует? (Roblox, HTML, алгоритмы...)"
+          data-i18n-placeholder="search_placeholder">
+        <button class="search-go" aria-label="Найти">→</button>
+      </div>
+    </div>
+
+    <div class="features-grid" id="features">
+      <!-- 1 -->
+      <div class="feat-card reveal-up">
+        <div class="feat-card-top">
+          <div class="feat-icon">💻</div>
+          <span class="feat-tag" data-i18n="feat_1_tag">01 // EXECUTION</span>
+        </div>
+        <div class="feat-card-title" data-i18n="feat_1_title">Практика с первого урока</div>
+        <div class="feat-card-text" data-i18n="feat_1_desc">Ребёнок сразу пишет код и создаёт проекты. Никакой скучной теории — только реальные результаты.</div>
+        <div class="feat-arrow">→</div>
+      </div>
+
+      <!-- 2 -->
+      <div class="feat-card reveal-up">
+        <div class="feat-card-top">
+          <div class="feat-icon">🧠</div>
+          <span class="feat-tag" data-i18n="feat_2_tag">02 // MENTORSHIP</span>
+        </div>
+        <div class="feat-card-title" data-i18n="feat_2_title">Опытные наставники</div>
+        <div class="feat-card-text" data-i18n="feat_2_desc">Индивидуальный темп или мини-группы до 4 человек. Каждый вопрос разбирается лично.</div>
+        <div class="feat-arrow">→</div>
+      </div>
+
+      <!-- 3 -->
+      <div class="feat-card reveal-up">
+        <div class="feat-card-top">
+          <div class="feat-icon">📊</div>
+          <span class="feat-tag" data-i18n="feat_3_tag">03 // TRANSPARENCY</span>
+        </div>
+        <div class="feat-card-title" data-i18n="feat_3_title">Отчётность родителям</div>
+        <div class="feat-card-text" data-i18n="feat_3_desc">Видео и скриншоты результатов после каждого урока. Прогресс ребёнка всегда прозрачен.</div>
+        <div class="feat-arrow">→</div>
+      </div>
+
+      <!-- 4 -->
+      <div class="feat-card reveal-up">
+        <div class="feat-card-top">
+          <div class="feat-icon">💬</div>
+          <span class="feat-tag" data-i18n="feat_4_tag">04 // SUPPORT</span>
+        </div>
+        <div class="feat-card-title" data-i18n="feat_4_title">Поддержка 24/7</div>
+        <div class="feat-card-text" data-i18n="feat_4_desc">Личный чат в Telegram: ответы на вопросы и помощь с багами в любое время суток.</div>
+        <div class="feat-arrow">→</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══ Courses ═══ -->
+<section class="section" id="courses">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow" data-i18n="courses_tag">// КАТАЛОГ НАПРАВЛЕНИЙ</span>
+      <h2 class="section-title" data-i18n="courses_title">Чему мы учим детей</h2>
+      <p class="section-sub" data-i18n="courses_desc">Все программы адаптированы под возраст 7–13 лет: от первых шагов до алгоритмического мышления.</p>
+    </div>
+
+    <div class="courses-grid">
+
+      <!-- Course 1: HTML & CSS -->
+      <div class="course-card reveal-up">
+        <div class="course-card-top">
+          <div class="course-badge-row">
+            <span class="course-age" data-i18n="course_1_age">7–11 лет</span>
+            <span class="course-type-tag">WEB-DEV</span>
+          </div>
+          <h3 class="course-title" data-i18n="course_1_title">HTML &amp; CSS Web-разработка</h3>
+          <p class="course-desc" data-i18n="course_1_desc">Создание собственных веб-страниц, интерактивных визиток и сайтов с нуля. Ребёнок поймёт устройство интернета и опубликует свой первый сайт.</p>
+          <div class="course-result" data-i18n="course_1_out">✓ Итог: 3 готовых сайта в личном портфолио</div>
+          <div class="course-stack">
+            <span class="stack-pill">HTML5</span>
+            <span class="stack-pill">CSS3</span>
+            <span class="stack-pill">Flexbox</span>
+            <span class="stack-pill">Анимации</span>
+          </div>
+        </div>
+        <div class="course-card-foot">
+          <div class="course-price">
+            <span class="course-price-label">от</span>
+            <span class="course-price-val">1 500 ₸/ч</span>
+          </div>
+          <button class="btn btn-secondary btn-sm open-modal-btn" data-course-pref="HTML & CSS" data-i18n="btn_enroll">Записаться</button>
+        </div>
+      </div>
+
+      <!-- Course 2: Python & Roblox -->
+      <div class="course-card reveal-up">
+        <div class="course-card-top">
+          <div class="course-badge-row">
+            <span class="course-age" data-i18n="course_2_age">8–13 лет</span>
+            <span class="course-type-tag">GAMEDEV</span>
+          </div>
+          <h3 class="course-title" data-i18n="course_2_title">Python &amp; Roblox GameDev</h3>
+          <p class="course-desc" data-i18n="course_2_desc">Логика программирования, переменные, циклы и создание 3D-миров в Roblox Studio. Превращаем игровое увлечение в умение создавать собственные проекты.</p>
+          <div class="course-result" data-i18n="course_2_out">✓ Итог: 2 свои игры в Roblox — играют друзья</div>
+          <div class="course-stack">
+            <span class="stack-pill">Python</span>
+            <span class="stack-pill">Roblox Studio</span>
+            <span class="stack-pill">Lua</span>
+            <span class="stack-pill">3D логика</span>
+          </div>
+        </div>
+        <div class="course-card-foot">
+          <div class="course-price">
+            <span class="course-price-label">от</span>
+            <span class="course-price-val">1 500 ₸/ч</span>
+          </div>
+          <button class="btn btn-primary btn-sm open-modal-btn" data-course-pref="Python & Roblox GameDev" data-i18n="btn_enroll">Записаться</button>
+        </div>
+      </div>
+
+      <!-- Course 3: C++ -->
+      <div class="course-card reveal-up">
+        <div class="course-card-top">
+          <div class="course-badge-row">
+            <span class="course-age" data-i18n="course_3_age">10–13 лет</span>
+            <span class="course-type-tag">ALGORITHMS</span>
+          </div>
+          <h3 class="course-title" data-i18n="course_3_title">C++ &amp; Алгоритмическое мышление</h3>
+          <p class="course-desc" data-i18n="course_3_desc">Алгоритмы, структуры данных и решение олимпиадных задач. Курс развивает глубокое логическое мышление — фундамент для любых технических успехов.</p>
+          <div class="course-result" data-i18n="course_3_out">✓ Итог: алгоритмическая база и олимпиадная подготовка</div>
+          <div class="course-stack">
+            <span class="stack-pill">C++20</span>
+            <span class="stack-pill">Алгоритмы</span>
+            <span class="stack-pill">Сортировки</span>
+            <span class="stack-pill">Олимпиадная логика</span>
+          </div>
+        </div>
+        <div class="course-card-foot">
+          <div class="course-price">
+            <span class="course-price-label">от</span>
+            <span class="course-price-val">1 500 ₸/ч</span>
+          </div>
+          <button class="btn btn-secondary btn-sm open-modal-btn" data-course-pref="C++ & Алгоритмы" data-i18n="btn_enroll">Записаться</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ Pricing ═══ -->
+<section class="section" id="pricing" style="background: var(--surface-1);">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow" data-i18n="pricing_tag">// ПРОЗРАЧНАЯ СТОИМОСТЬ</span>
+      <h2 class="section-title" data-i18n="pricing_title">Форматы обучения и цены</h2>
+      <p class="section-sub" data-i18n="pricing_desc">Никаких скрытых платежей — оплата только за реальные часы занятий в Google Meet.</p>
+    </div>
+
+    <div class="pricing-grid">
+
+      <!-- Individual -->
+      <div class="price-card reveal-up">
+        <div>
+          <div class="price-format-tag" data-i18n="price_1_format">ИНДИВИДУАЛЬНО (1-НА-1)</div>
+          <div class="price-title" data-i18n="price_1_title">Персональное обучение</div>
+          <div class="price-amount-row">
+            <span class="price-amount" data-i18n="price_1_val">2 500 ₸</span>
+            <span class="price-period" data-i18n="price_1_period">/ час занятия</span>
+          </div>
+        </div>
+        <ul class="price-features">
+          <li class="price-feat"><span class="price-feat-check">✓</span><span data-i18n="price_1_f1">100% внимания преподавателя</span></li>
+          <li class="price-feat"><span class="price-feat-check">✓</span><span data-i18n="price_1_f2">Гибкое персональное расписание</span></li>
+          <li class="price-feat"><span class="price-feat-check">✓</span><span data-i18n="price_1_f3">Программа подстраивается под ребёнка</span></li>
+          <li class="price-feat"><span class="price-feat-check">✓</span><span data-i18n="price_1_f4">Персональный чат в Telegram</span></li>
+        </ul>
+        <button class="btn btn-secondary open-modal-btn" data-course-pref="Индивидуально" data-i18n="btn_choose_plan">
+          Выбрать формат
+        </button>
+      </div>
+
+      <!-- Group (featured) -->
+      <div class="price-card featured reveal-up">
+        <div class="price-badge" data-i18n="price_2_badge">ПОПУЛЯРНЫЙ ВЫБОР</div>
+        <div>
+          <div class="price-format-tag" data-i18n="price_2_format">МИНИ-ГРУППА (ДО 4 ЧЕЛОВЕК)</div>
+          <div class="price-title" data-i18n="price_2_title">Обучение в мини-группе</div>
+          <div class="price-amount-row">
+            <span class="price-amount" data-i18n="price_2_val">1 500 ₸</span>
+            <span class="price-period" data-i18n="price_2_period">/ час занятия</span>
+          </div>
+        </div>
+        <ul class="price-features">
+          <li class="price-feat"><span class="price-feat-check">✓</span><span data-i18n="price_2_f1">Строго до 4 учеников в группе</span></li>
+          <li class="price-feat"><span class="price-feat-check">✓</span><span data-i18n="price_2_f2">Соревновательный дух и общение</span></li>
+          <li class="price-feat"><span class="price-feat-check">✓</span><span data-i18n="price_2_f3">Совместные проекты и парное программирование</span></li>
+          <li class="price-feat"><span class="price-feat-check">✓</span><span data-i18n="price_2_f4">Самая доступная цена за качество</span></li>
+        </ul>
+        <button class="btn btn-primary open-modal-btn" data-course-pref="Мини-группа до 4 чел" data-i18n="btn_choose_plan">
+          Выбрать формат <span class="arrow">→</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Calculator -->
+    <div class="calc-card reveal-up">
+      <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:24px;" data-i18n="calc_title">Калькулятор стоимости</h3>
+      <div class="calc-grid">
+        <div>
+          <div class="calc-group">
+            <label class="calc-label" data-i18n="calc_format_label">Выберите формат:</label>
+            <div class="calc-fmt-row">
+              <button type="button" class="calc-fmt-btn active" data-format="group" data-i18n="calc_fmt_group">Группа (1 500 ₸/ч)</button>
+              <button type="button" class="calc-fmt-btn" data-format="indiv" data-i18n="calc_fmt_indiv">Индив. (2 500 ₸/ч)</button>
+            </div>
+          </div>
+          <div class="calc-group">
+            <label class="calc-label" data-i18n="calc_hours_label">Занятий в неделю:</label>
+            <div class="calc-range-row">
+              <input type="range" id="calcRange" class="calc-range" min="1" max="4" step="1" value="2">
+              <span class="calc-range-val" id="calcHoursVal">2 урока/нед</span>
+            </div>
+          </div>
+        </div>
+        <div class="calc-result">
+          <div class="calc-result-label" data-i18n="calc_total_label">Примерная стоимость в месяц:</div>
+          <div class="calc-result-total" id="calcTotal">12 000 ₸</div>
+          <button class="btn btn-wa" id="calcCtaBtn" style="width:100%;justify-content:center;">
+            <svg width="18" height="18" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 1.95.813 3.097.813h.001c3.18 0 5.767-2.586 5.768-5.766 0-3.18-2.588-5.766-5.77-5.766zm9.969 5.766c0 5.518-4.482 10-10 10-1.749 0-3.385-.45-4.819-1.238l-5.181 1.36 1.385-5.061c-.886-1.493-1.385-3.236-1.385-5.061 0-5.518 4.482-10 10-10s10 4.482 10 10z"/></svg>
+            <span data-i18n="calc_btn">Зафиксировать в WhatsApp</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══ Transparency / Parent report ═══ -->
+<section class="section" id="transparency">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow" data-i18n="report_tag">// ПРОЗРАЧНОСТЬ ДЛЯ РОДИТЕЛЕЙ</span>
+      <h2 class="section-title" data-i18n="report_title">Как вы следите за прогрессом</h2>
+      <p class="section-sub" data-i18n="report_desc">После каждого урока преподаватель отправляет вам видео и краткий отчёт в мессенджер.</p>
+    </div>
+
+    <div class="report-wrap reveal-up">
+      <div class="report-bar">
+        <div class="report-avi">
+          <img src="logo/logo.gif" alt="CodeStudy." style="width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;">
+        </div>
+        <div>
+          <div class="report-name" data-i18n="report_name">Преподаватель CodeStudy.</div>
+          <div class="report-online">● онлайн — Google Meet отчёт</div>
+        </div>
+      </div>
+      <div class="report-body">
+        <div class="bubble">
+          <span data-i18n="report_text_1">Здравствуйте, Айгуль! Сегодня Арман (9 лет) прошёл тему циклов в Roblox Studio. Он самостоятельно запрограммировал исчезающие платформы и систему ловушек.</span>
+        </div>
+        <div class="bubble">
+          <span data-i18n="report_text_2">📹 Прикрепляю видео работы скрипта и скриншот кода. Арман отлично справился с логикой!</span>
+          <div class="bubble-media">
+            ▶ [Видео: Roblox_Obby_Trap_Arman.mp4 — 00:48]<br>
+            ✓ Урок завершён | ДЗ: протестировать прыжок
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══ FAQ ═══ -->
+<section class="section" id="faq" style="background: var(--surface-1);">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow" data-i18n="faq_tag">// ВОПРОСЫ И ОТВЕТЫ</span>
+      <h2 class="section-title" data-i18n="faq_title">Часто задаваемые вопросы</h2>
+    </div>
+
+    <div class="faq-list">
+
+      <div class="faq-item reveal-up open">
+        <button class="faq-q">
+          <span data-i18n="faq_q1">Поможет ли курс C++ поступить в НИШ или РФМШ?</span>
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">
+          <p data-i18n="faq_a1">Курс не ставит целью прямое поступление в НИШ — но он развивает фундаментальное алгоритмическое мышление и математическую логику, что даёт ребёнку сильное интеллектуальное преимущество в любых технических испытаниях.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal-up">
+        <button class="faq-q">
+          <span data-i18n="faq_q2">Как проходят занятия в Google Meet?</span>
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">
+          <p data-i18n="faq_a2">Преподаватель созванивается с ребёнком, ученик включает демонстрацию экрана. Преподаватель в реальном времени видит код, подсказывает и направляет мыслительный процесс.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal-up">
+        <button class="faq-q">
+          <span data-i18n="faq_q3">Какой компьютер нужен для занятий?</span>
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">
+          <p data-i18n="faq_a3">Подойдёт любой ноутбук или ПК с Windows или macOS, микрофоном и стабильным интернетом. Установку всех программ (VS Code, Roblox Studio) мы проведём бесплатно на первом вводном уроке.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal-up">
+        <button class="faq-q">
+          <span data-i18n="faq_q4">Что будет на бесплатном пробном уроке?</span>
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">
+          <p data-i18n="faq_a4">За 45 минут преподаватель познакомится с ребёнком, определит его уровень и интересы, и вместе они создадут первый мини-проект или игру. Родители получают план дальнейшего обучения.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ Final CTA band ═══ -->
+<section class="section">
+  <div class="container">
+    <div class="cta-band reveal-up">
+      <h2 class="cta-band-title">Готовы раскрыть потенциал ребёнка?</h2>
+      <p class="cta-band-sub">Запишитесь на бесплатный пробный урок прямо сейчас — мы подберём удобное время и покажем, как увлекательно писать код в Google Meet.</p>
+      <div class="cta-band-row">
+        <button class="btn btn-primary open-modal-btn">
+          Записаться на пробный урок <span class="arrow">→</span>
+        </button>
+        <button class="btn btn-secondary direct-wa-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#25D366" d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 1.95.813 3.097.813h.001c3.18 0 5.767-2.586 5.768-5.766 0-3.18-2.588-5.766-5.77-5.766zm9.969 5.766c0 5.518-4.482 10-10 10-1.749 0-3.385-.45-4.819-1.238l-5.181 1.36 1.385-5.061c-.886-1.493-1.385-3.236-1.385-5.061 0-5.518 4.482-10 10-10s10 4.482 10 10z"/></svg>
+          Написать в WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ Footer ═══ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="brand">
+        <div class="brand-mark">
+          <img src="logo/logo.gif" alt="CodeStudy." class="brand-avatar">
+        </div>
+        <span class="brand-name">CodeStudy.</span>
+      </div>
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+        <span style="font-size:13px;color:var(--text-muted);">WhatsApp: +7 771 292 7393</span>
+        <button class="btn btn-wa btn-sm direct-wa-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 1.95.813 3.097.813h.001c3.18 0 5.767-2.586 5.768-5.766 0-3.18-2.588-5.766-5.77-5.766zm9.969 5.766c0 5.518-4.482 10-10 10-1.749 0-3.385-.45-4.819-1.238l-5.181 1.36 1.385-5.061c-.886-1.493-1.385-3.236-1.385-5.061 0-5.518 4.482-10 10-10s10 4.482 10 10z"/></svg>
+          WhatsApp
+        </button>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 CodeStudy. — Онлайн-школа программирования для детей 7–13 лет</div>
+      <div>Google Meet · Казахстан</div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══ Floating WhatsApp FAB ═══ -->
+<a href="#" class="fab-wa direct-wa-btn" aria-label="Написать в WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 1.95.813 3.097.813h.001c3.18 0 5.767-2.586 5.768-5.766 0-3.18-2.588-5.766-5.77-5.766zm9.969 5.766c0 5.518-4.482 10-10 10-1.749 0-3.385-.45-4.819-1.238l-5.181 1.36 1.385-5.061c-.886-1.493-1.385-3.236-1.385-5.061 0-5.518 4.482-10 10-10s10 4.482 10 10z"/></svg>
+</a>
+
+
+<!-- ═══ Quiz Modal ═══ -->
+<div class="quiz-overlay" id="quizModal" role="dialog" aria-modal="true" aria-label="Интерактивный квиз">
+  <div class="quiz-box">
+
+    <!-- Header -->
+    <div class="quiz-header">
+      <div class="quiz-progress-wrap">
+        <div class="quiz-progress-track">
+          <div class="quiz-progress-fill" id="quizProgressFill"></div>
+        </div>
+        <span class="quiz-step-label" id="quizStepLabel">Шаг 1 из 3</span>
+      </div>
+      <button class="quiz-close" id="quizClose" aria-label="Закрыть">✕</button>
+    </div>
+
+    <!-- ── STEP 1: Age ── -->
+    <div class="quiz-step" id="qStep1">
+      <div class="quiz-step-emoji">👦</div>
+      <h3 class="quiz-step-title">Сколько лет вашему ребёнку?</h3>
+      <p class="quiz-step-sub">Это поможет подобрать подходящую программу</p>
+      <div class="quiz-cards-grid quiz-age-grid">
+        <button class="quiz-card" data-val="junior" data-next="2">
+          <div class="quiz-card-icon">🌱</div>
+          <div class="quiz-card-title">6–9 лет</div>
+          <div class="quiz-card-desc">Младшая группа</div>
+        </button>
+        <button class="quiz-card" data-val="middle" data-next="2">
+          <div class="quiz-card-icon">⚡</div>
+          <div class="quiz-card-title">10–13 лет</div>
+          <div class="quiz-card-desc">Средняя группа</div>
+        </button>
+        <button class="quiz-card" data-val="senior" data-next="2">
+          <div class="quiz-card-icon">🏆</div>
+          <div class="quiz-card-title">14–16 лет</div>
+          <div class="quiz-card-desc">Старшая / Олимпиады</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── STEP 2: Interest ── -->
+    <div class="quiz-step hidden" id="qStep2">
+      <div class="quiz-step-emoji">🎯</div>
+      <h3 class="quiz-step-title">Что больше всего привлекает?</h3>
+      <p class="quiz-step-sub">Выберите то, что кажется самым интересным</p>
+      <div class="quiz-cards-grid quiz-interest-grid">
+        <button class="quiz-card quiz-card-wide" data-val="gamedev" data-next="3">
+          <div class="quiz-card-icon">🎮</div>
+          <div class="quiz-card-title">Создание игр</div>
+          <div class="quiz-card-desc">Roblox Studio, Python / Pygame, 3D-миры</div>
+        </button>
+        <button class="quiz-card quiz-card-wide" data-val="webdev" data-next="3">
+          <div class="quiz-card-icon">🌐</div>
+          <div class="quiz-card-title">Сайты и веб-дизайн</div>
+          <div class="quiz-card-desc">HTML, CSS, создание интерфейсов</div>
+        </button>
+        <button class="quiz-card quiz-card-wide" data-val="algo" data-next="3">
+          <div class="quiz-card-icon">🧠</div>
+          <div class="quiz-card-title">Логика и олимпиады</div>
+          <div class="quiz-card-desc">C++, математика, алгоритмы</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── STEP 3: Micro Logic Question ── -->
+    <div class="quiz-step hidden" id="qStep3">
+      <div class="quiz-step-emoji">🤔</div>
+      <h3 class="quiz-step-title quiz-step-q" id="quizMicroTitle">Маленький вопрос на логику!</h3>
+      <p class="quiz-step-sub" id="quizMicroText">Персонажу нужно сделать 5 шагов вперёд. Какой блок кода лучше использовать?</p>
+      <div class="quiz-options-list" id="quizMicroOptions">
+        <button class="quiz-option" data-correct="false">
+          <span class="quiz-option-letter">Б</span>
+          <span class="quiz-option-text">Написать «Шаг» 100 раз</span>
+        </button>
+        <button class="quiz-option" data-correct="true">
+          <span class="quiz-option-letter">А</span>
+          <span class="quiz-option-text">Повторить 5 раз действие «Шаг»</span>
+        </button>
+        <button class="quiz-option" data-correct="false">
+          <span class="quiz-option-letter">В</span>
+          <span class="quiz-option-text">Ничего не делать</span>
+        </button>
+      </div>
+      <div class="quiz-feedback hidden" id="quizFeedback">
+        <div class="quiz-feedback-icon" id="quizFeedbackIcon">✅</div>
+        <div class="quiz-feedback-text" id="quizFeedbackText">Правильно! Это называется цикл — основа программирования!</div>
+        <button class="btn btn-primary quiz-next-btn" id="quizToResult">Узнать мой курс →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 4: Result + Form ── -->
+    <div class="quiz-step hidden" id="qStep4">
+      <div class="quiz-result-header">
+        <div class="quiz-result-badge" id="quizResultBadge">🚀</div>
+        <h3 class="quiz-result-title" id="quizResultTitle">Вам идеально подходит: Python &amp; GameDev!</h3>
+        <p class="quiz-result-desc" id="quizResultDesc">Ваш ребёнок за 45 минут создаст свою первую мини-игру под руководством наставника.</p>
+      </div>
+      <div class="quiz-form-wrap">
+        <p class="quiz-form-label">Запишитесь на <strong>БЕСПЛАТНЫЙ пробный урок</strong> прямо сейчас:</p>
+        <form id="quizForm">
+          <div class="quiz-form-row">
+            <div class="quiz-input-wrap">
+              <span class="quiz-input-icon">👤</span>
+              <input type="text" id="quizParentName" class="quiz-input" placeholder="Имя родителя" required>
+            </div>
+            <div class="quiz-input-wrap">
+              <span class="quiz-input-icon">📱</span>
+              <input type="tel" id="quizPhone" class="quiz-input" placeholder="Номер WhatsApp" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-quiz-submit">
+            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 1.95.813 3.097.813h.001c3.18 0 5.767-2.586 5.768-5.766 0-3.18-2.588-5.766-5.77-5.766zm9.969 5.766c0 5.518-4.482 10-10 10-1.749 0-3.385-.45-4.819-1.238l-5.181 1.36 1.385-5.061c-.886-1.493-1.385-3.236-1.385-5.061 0-5.518 4.482-10 10-10s10 4.482 10 10z"/></svg>
+            Записаться на БЕСПЛАТНЫЙ пробный урок
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Back button -->
+    <div class="quiz-footer">
+      <button class="quiz-back-btn" id="quizBackBtn">← Назад</button>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══ Booking Modal ═══ -->
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal-box">
+    <button class="modal-close" aria-label="Закрыть">&times;</button>
+    <h3 class="modal-title" data-i18n="modal_title">Запись на бесплатный пробный урок</h3>
+    <p class="modal-sub" data-i18n="modal_desc">Оставьте данные — мы свяжемся через WhatsApp для согласования удобного времени.</p>
+
+    <form id="bookingForm">
+      <div class="form-group">
+        <label class="form-label" data-i18n="modal_name_label">Имя ребёнка или ваше имя:</label>
+        <input type="text" id="modalName" class="form-input" placeholder="Например: Арман или Айгуль" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="modal_age_label">Возраст ребёнка:</label>
+        <select id="modalAge" class="form-select">
+          <option value="7 лет">7 лет</option>
+          <option value="8 лет">8 лет</option>
+          <option value="9 лет" selected>9 лет</option>
+          <option value="10 лет">10 лет</option>
+          <option value="11 лет">11 лет</option>
+          <option value="12 лет">12 лет</option>
+          <option value="13 лет">13 лет</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="modal_course_label">Интересующий курс:</label>
+        <select id="modalCourse" class="form-select">
+          <option value="Python & Roblox GameDev">Python & Roblox GameDev</option>
+          <option value="HTML & CSS">HTML & CSS — создание сайтов</option>
+          <option value="C++ & Алгоритмы">C++ & Алгоритмическое мышление</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="modal_format_label">Формат занятий:</label>
+        <select id="modalFormat" class="form-select">
+          <option value="Мини-группа до 4 чел (1 500 ₸/час)">Мини-группа до 4 чел (1 500 ₸/час)</option>
+          <option value="Индивидуально 1-на-1 (2 500 ₸/час)">Индивидуально 1-на-1 (2 500 ₸/час)</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-wa" style="width:100%;justify-content:center;margin-top:8px;">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 1.95.813 3.097.813h.001c3.18 0 5.767-2.586 5.768-5.766 0-3.18-2.588-5.766-5.77-5.766zm9.969 5.766c0 5.518-4.482 10-10 10-1.749 0-3.385-.45-4.819-1.238l-5.181 1.36 1.385-5.061c-.886-1.493-1.385-3.236-1.385-5.061 0-5.518 4.482-10 10-10s10 4.482 10 10z"/></svg>
+        <span data-i18n="modal_submit">Записаться через WhatsApp</span>
+      </button>
+    </form>
+  </div>
+</div>
+
+
+<!-- ═══ Scripts ═══ -->
+<script src="js/translations.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,414 @@
+/* ==========================================================================
+   CodeStudy. // ACADEMY - Layout & Sections
+   Matches the layout and structure of the Algo.kz reference
+   ========================================================================== */
+
+/* Header / Navbar */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  background: rgba(6, 8, 15, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+  z-index: 1000;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.site-header.scrolled {
+  background: rgba(6, 8, 15, 0.92);
+  border-bottom-color: rgba(59, 130, 246, 0.2);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+
+.brand-logo .academy-tag {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--accent-cyan);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-link {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+  position: relative;
+  padding: 6px 0;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: #fff;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-cyan);
+  transition: width var(--transition-fast);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Language Switcher */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  padding: 3px;
+}
+
+.lang-btn {
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+}
+
+.lang-btn.active {
+  background: var(--accent-blue);
+  color: #fff;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+}
+
+/* Mobile Hamburger */
+.mobile-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.mobile-toggle span {
+  width: 24px;
+  height: 2px;
+  background: #fff;
+  transition: all var(--transition-fast);
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  padding-top: calc(var(--header-height) + 40px);
+  padding-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Video Background Layer */
+.hero-video-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.hero-bg-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.28;
+  filter: contrast(110%) brightness(85%);
+}
+
+.hero-video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse at center, rgba(6, 8, 15, 0.4) 0%, rgba(6, 8, 15, 0.85) 70%, #06080F 100%),
+    linear-gradient(180deg, rgba(6, 8, 15, 0.8) 0%, rgba(6, 8, 15, 0.4) 30%, rgba(6, 8, 15, 0.95) 90%, #06080F 100%);
+  pointer-events: none;
+}
+
+/* Hero Content Grid (Reference Layout: Left tech stack, Center-left main, Right IDE mockup) */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 140px 1fr 1.05fr;
+  gap: 36px;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+/* Hero Left Tech Stack */
+.hero-tech-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.hero-tech-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.hero-tech-item::before {
+  content: '—';
+  color: var(--accent-cyan);
+}
+
+.hero-tech-item:hover {
+  color: #fff;
+  transform: translateX(4px);
+}
+
+/* Hero Main Center Column */
+.hero-main {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.hero-category-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-size: 3.2rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+
+.hero-subtitle {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 540px;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+/* 4 Feature Cards Row (Exactly like reference bottom cards) */
+.hero-features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 10px;
+}
+
+/* Search Bar below feature cards */
+.quick-search-wrapper {
+  margin: 32px auto 0;
+  max-width: 680px;
+  position: relative;
+}
+
+/* Section Common Layout */
+.section {
+  padding: 100px 0;
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 56px;
+}
+
+.section-tag {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+
+.section-desc {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+}
+
+/* Courses Grid */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+/* Pricing Grid */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  max-width: 960px;
+  margin: 0 auto 50px;
+}
+
+/* Calculator & FAQ Layouts */
+.calc-wrapper {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.faq-list {
+  max-width: 840px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Footer Layout */
+.site-footer {
+  border-top: 1px solid var(--border-subtle);
+  background: #04060A;
+  padding: 50px 0 30px;
+  margin-top: 60px;
+  font-size: 0.9rem;
+}
+
+.footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 30px;
+  border-bottom: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 25px;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* Media Queries */
+@media (max-width: 1120px) {
+  .hero-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .hero-tech-sidebar {
+    display: none;
+  }
+  .hero-title {
+    font-size: 2.6rem;
+  }
+  .hero-features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 860px) {
+  .nav-links {
+    display: none;
+  }
+  .mobile-toggle {
+    display: flex;
+  }
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .courses-grid {
+    grid-template-columns: 1fr;
+  }
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-features-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-title {
+    font-size: 2.1rem;
+  }
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .btn-primary, .btn-secondary, .btn-whatsapp {
+    justify-content: center;
+    width: 100%;
+  }
+}

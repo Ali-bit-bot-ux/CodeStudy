@@ -1,0 +1,49 @@
+/* ==========================================================================
+   CodeStudy. — Design Tokens (Stepplify-inspired, Blue accent)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* Brand colors */
+  --blue:        #2563EB;
+  --blue-dark:   #1D4ED8;
+  --blue-glow:   rgba(37, 99, 235, 0.45);
+
+  --accent:      var(--blue);
+  --accent-dark: var(--blue-dark);
+
+  /* Surface */
+  --bg:          #06080F;
+  --surface-1:   #0A0E1A;
+  --surface-2:   #0F172A;
+
+  /* Text */
+  --text-light:  #F4F8FB;
+  --text-mid:    #94A3B8;
+  --text-muted:  #475569;
+
+  /* Nav glass */
+  --nav-bg:     rgba(255, 255, 255, 0.10);
+  --nav-border: rgba(255, 255, 255, 0.28);
+
+  /* WA green */
+  --wa:         #25D366;
+  --wa-glow:    rgba(37,211,102,0.35);
+
+  /* Layout */
+  --max-w:      1120px;
+  --radius-pill: 999px;
+  --radius-lg:   20px;
+  --radius-md:   12px;
+  --radius-sm:   8px;
+
+  /* Typography */
+  --font:       'Montserrat', system-ui, sans-serif;
+  --font-mono:  'JetBrains Mono', monospace;
+
+  /* Transitions */
+  --t-fast:    0.18s ease;
+  --t-smooth:  0.32s ease;
+  --t-spring:  0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}

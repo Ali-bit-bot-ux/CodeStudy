@@ -1,0 +1,44 @@
+/* ==========================================================================
+   CodeStudy. — Micro-animations
+   ========================================================================== */
+
+/* Glow on featured cards */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(37,99,235,0.2); }
+  50%       { box-shadow: 0 0 36px rgba(37,99,235,0.38); }
+}
+
+.price-card.featured { animation: glow-pulse 3.5s ease-in-out infinite; }
+
+/* Shimmer on primary buttons */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: linear-gradient(60deg, transparent 30%, rgba(255,255,255,0.12) 50%, transparent 70%);
+  transform: translate(-100%, -100%) rotate(30deg);
+  transition: none;
+}
+.btn-primary:hover::after {
+  animation: shimmer 1.2s ease-out;
+}
+@keyframes shimmer {
+  from { transform: translate(-100%, -100%) rotate(30deg); }
+  to   { transform: translate(100%, 100%) rotate(30deg); }
+}
+
+/* Blink cursor for mono tags */
+.blink {
+  display: inline-block;
+  width: 6px; height: 14px;
+  background: #60A5FA;
+  vertical-align: middle;
+  margin-left: 3px;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
