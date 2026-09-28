@@ -38,19 +38,37 @@ function initMobileNav() {
   const nav    = document.getElementById("navCenter");
   if (!toggle || !nav) return;
 
-  toggle.addEventListener("click", () => {
+  const closeMenu = () => {
+    nav.classList.remove("mobile-open");
+    toggle.setAttribute("aria-expanded", "false");
+  };
+
+  toggle.addEventListener("click", (e) => {
+    e.stopPropagation();
     const open = nav.classList.toggle("mobile-open");
     toggle.setAttribute("aria-expanded", open);
   });
 
-  // Close when a nav link is clicked
-  nav.querySelectorAll("a").forEach(a =>
-    a.addEventListener("click", () => {
-      nav.classList.remove("mobile-open");
-      toggle.setAttribute("aria-expanded", "false");
-    })
+  // Close when a nav link or CTA button inside is clicked
+  nav.querySelectorAll("a, button").forEach(el =>
+    el.addEventListener("click", closeMenu)
   );
+
+  // Close when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!toggle.contains(e.target) && !nav.contains(e.target)) {
+      closeMenu();
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && nav.classList.contains("mobile-open")) {
+      closeMenu();
+    }
+  });
 }
+
 
 // ─── Scroll reveal ─────────────────────────────────────────────────────────
 function initReveal() {
